@@ -1,0 +1,12 @@
+.description {
+    padding: 20px;
+}
+
+img {
+    height: 300px;
+}
+
+.description img {
+    border-radius: 50px;
+    height: 100px;
+}
