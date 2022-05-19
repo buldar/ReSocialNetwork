@@ -8,6 +8,7 @@ import {Routes, Route} from 'react-router-dom'
 
 
 const App = (props) => {
+    debugger
     return (
         <div className='app-wrapper'>
             <Header/>
@@ -19,7 +20,7 @@ const App = (props) => {
                     />
                     <Route path='/profile' element={<Profile
                         dispatch={props.dispatch}
-                        addPost={props.addPost}
+                        // addPost={props.addPost}
                         profilePage={props.state.profilePage}/>}
                     />
                     <Route path="*" element={<h1>Not found</h1>}
