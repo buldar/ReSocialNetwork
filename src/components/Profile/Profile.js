@@ -7,9 +7,7 @@ export const Profile = (props) => {
         <div>
             <ProfileInfo/>
             <MyPostsContainer
-                posts={props.profilePage.posts}
-                newPostText={props.profilePage.newPostText}
-                dispatch={props.dispatch}
+                store={props.store}
             />
         </div>
     )
