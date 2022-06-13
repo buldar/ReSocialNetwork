@@ -5,6 +5,7 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Routes, Route} from 'react-router-dom'
 import {DialogsContainer} from "./components/Dialogs/Dialogs.Container";
+import {UsersContainer} from "./components/Users/Users.Container";
 
 
 const App = (props) => {
@@ -16,11 +17,10 @@ const App = (props) => {
                 <Routes>
                     <Route path='/dialogs/*' element={<DialogsContainer/>}/>
                     <Route path='/profile' element={<Profile/>}/>
+                    <Route path='/users' element={<UsersContainer/>}/>
                     <Route path="*" element={<h1>Not found</h1>}/>
                 </Routes>
             </div>
-
-
             {/*<footer className='footer'>Footer</footer>*/}
         </div>
 
