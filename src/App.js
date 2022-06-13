@@ -8,7 +8,6 @@ import {DialogsContainer} from "./components/Dialogs/Dialogs.Container";
 
 
 const App = (props) => {
-    debugger
     return (
         <div className='app-wrapper'>
             <Header/>
