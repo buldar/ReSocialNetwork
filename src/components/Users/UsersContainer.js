@@ -1,17 +1,17 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    followAC,
-    setCurrentPageAC, setFetchingFalseAC, setFetchingTrueAC,
-    setTotalUsersCountAC,
-    setUserAC,
-    unfollowAC,
+    follow,
+    setCurrentPage, setFetchingFalse, setFetchingTrue,
+    setTotalUsersCount,
+    setUsers,
+    unfollow
 } from "../../redux/users-reducer";
 import axios from "axios";
 import {Users} from "./Users";
 import loader from '../../pic/loader.gif'
 
-class UsersAPIComponent extends React.Component {
+class UsersContainer extends React.Component {
 
     componentDidMount() {
         this.props.setFetchingTrue()
@@ -58,31 +58,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        follow: (userId)=>{
-            dispatch(followAC(userId))
-        },
-        unfollow:(userId)=> {
-            dispatch(unfollowAC(userId))
-        },
-        setUsers: (users) => {
-            dispatch(setUserAC(users))
-        },
-        setCurrentPage:(currentPage)=> {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setTotalUsersCount:(totalCount)=> {
-            dispatch(setTotalUsersCountAC(totalCount))
-        },
-        setFetchingTrue:()=>{
-            dispatch(setFetchingTrueAC())
-        },
-        setFetchingFalse:()=>{
-            dispatch(setFetchingFalseAC())
-        },
-    }
-}
-
-
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
+export default connect(mapStateToProps,
+    {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount,
+    setFetchingTrue,setFetchingFalse})(UsersContainer)
