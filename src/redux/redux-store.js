@@ -9,4 +9,8 @@ let reducers = combineReducers({
     usersPage:usersReducer
 });
 
+
+
 export let store = legacy_createStore(reducers);
+
+window.store = store

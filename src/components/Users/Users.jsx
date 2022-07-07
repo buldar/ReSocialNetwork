@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./Users.module.css";
 import noAva from "../../pic/noname.jpg";
+import {NavLink} from "react-router-dom";
 
 export const Users = (props) => {
 
@@ -31,7 +32,7 @@ export const Users = (props) => {
                 props.users.map(u => <div key={u.id}>
                     <span>
                         <div className={style.ava}>
-                            <img src={u.photos.small != null ? u.photos.small : noAva}/>
+                            <NavLink to={'/profile/'+u.id}><img src={u.photos.small != null ? u.photos.small : noAva}/></NavLink>
                         </div>
                         <div>
                             {u.followed
