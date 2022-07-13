@@ -5,6 +5,7 @@ const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT'
 const SET_FETCHING_TRUE = 'SET-FETCHING-TRUE'
 const SET_FETCHING_FALSE = 'SET-FETCHING-FALSE'
+const TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE-FOLLOWING-PROGRESS'
 
 export let AVA = 'https://st2.depositphotos.com/1898481/6448/i/600/depositphotos_64486573-stock-photo-people.jpg'
 
@@ -13,7 +14,8 @@ let initialState = {
     pageSize:5,
     totalUsersCount:0,
     currentPage:1,
-    isFetching: true
+    isFetching: true,
+    followingInProgress: []
 }
 
 export const usersReducer = (state = initialState, action) => {
@@ -66,6 +68,14 @@ export const usersReducer = (state = initialState, action) => {
                 ...state,
                 isFetching: false
             }
+        case TOGGLE_FOLLOWING_PROGRESS:
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                    ?[...state.followingInProgress, action.id]
+                    :[state.followingInProgress.filter(id=>id!==action.id)]
+
+            }
         default:
             return state
     }
@@ -78,3 +88,4 @@ export const setCurrentPage = (currentPage)=>({type:SET_CURRENT_PAGE, currentPag
 export const setTotalUsersCount = (totalUsersCount)=>({type:SET_TOTAL_USERS_COUNT, totalUsersCount})
 export const setFetchingTrue = () => ({type:SET_FETCHING_TRUE})
 export const setFetchingFalse = () => ({type:SET_FETCHING_FALSE})
+export const toggleFollowingProgress = (id, isFetching) =>({type:TOGGLE_FOLLOWING_PROGRESS, id, isFetching})
