@@ -1,11 +1,11 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    follow,
+    acceptFollow, getUsers,
     setCurrentPage, setFetchingFalse, setFetchingTrue,
     setTotalUsersCount,
     setUsers, toggleFollowingProgress,
-    unfollow
+    acceptUnfollow, unfollow, follow
 } from "../../redux/users-reducer";
 import {Users} from "./Users";
 import loader from '../../pic/loader.gif'
@@ -14,23 +14,11 @@ import {usersAPI} from "../../api/api";
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.setFetchingTrue()
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.setUsers(data.items)
-                this.props.setTotalUsersCount(data.totalCount)
-                this.props.setFetchingFalse()
-            })
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (page) => {
-        this.props.setCurrentPage(page)
-        this.props.setFetchingTrue()
-        usersAPI.getUsers(page, this.props.pageSize)
-            .then(data => {
-                this.props.setUsers(data.items)
-                this.props.setFetchingFalse()
-            })
+        this.props.getUsers(page, this.props.pageSize)
     }
 
     render() {
@@ -44,7 +32,6 @@ class UsersContainer extends React.Component {
                     users={this.props.users}
                     unfollow={this.props.unfollow}
                     follow={this.props.follow}
-                    toggleFollowingProgress={this.props.toggleFollowingProgress}
                     followingInProgress={this.props.followingInProgress}
                 />}
 
@@ -64,7 +51,4 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps,
-    {
-        follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount,
-        setFetchingTrue, setFetchingFalse, toggleFollowingProgress
-    })(UsersContainer)
+    {acceptFollow, acceptUnfollow, toggleFollowingProgress, getUsers, unfollow, follow})(UsersContainer)

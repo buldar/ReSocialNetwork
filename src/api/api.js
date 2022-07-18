@@ -26,5 +26,9 @@ export const usersAPI = {
     setAuthMe() {
         return instance.get(`auth/me`)
             .then(response => response.data)
+    },
+    setMyProfile (id) {
+        return instance.get(`profile/${id}`)
+            .then(response=>response.data)
     }
 }

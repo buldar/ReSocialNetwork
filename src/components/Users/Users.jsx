@@ -45,26 +45,12 @@ export const Users = (props) => {
                             {u.followed
                                 ? <button disabled={props.followingInProgress.some(id=>id===u.id)}
                                           onClick={() => {
-                                              props.toggleFollowingProgress(u.id, true)
-                                              usersAPI.unfollow(u.id)
-                                                  .then(response => {
-                                                      if (response.resultCode === 0) {
-                                                          props.unfollow(u.id)
-                                                      }
-                                                      props.toggleFollowingProgress(u.id, false)
-                                                  })
+                                              props.unfollow(u.id)
                                           }}>Unfollow</button>
 
                                 : <button disabled={props.followingInProgress.some(id=>id===u.id)}
                                           onClick={() => {
-                                              props.toggleFollowingProgress(u.id, true)
-                                              usersAPI.follow(u.id)
-                                                  .then(response => {
-                                                      if (response.resultCode === 0) {
-                                                          props.follow(u.id)
-                                                      }
-                                                      props.toggleFollowingProgress(u.id, false)
-                                                  })
+                                              props.follow(u.id)
                                           }}>Follow</button>}
                         </div>
                     </span>
