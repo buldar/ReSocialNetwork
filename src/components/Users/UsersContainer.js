@@ -2,14 +2,11 @@ import React from "react";
 import {connect} from "react-redux";
 import {
     acceptFollow, getUsers,
-    setCurrentPage, setFetchingFalse, setFetchingTrue,
-    setTotalUsersCount,
-    setUsers, toggleFollowingProgress,
+    toggleFollowingProgress,
     acceptUnfollow, unfollow, follow
 } from "../../redux/users-reducer";
 import {Users} from "./Users";
 import loader from '../../pic/loader.gif'
-import {usersAPI} from "../../api/api";
 
 class UsersContainer extends React.Component {
 
