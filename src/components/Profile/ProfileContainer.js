@@ -2,15 +2,18 @@ import React from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {getUserProfile} from "../../redux/profile-reducer";
-import {useLocation, useNavigate, useParams} from "react-router";
+import {Navigate, useLocation, useNavigate, useParams} from "react-router";
 
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
         let userId = this.props.router.params.userId
-        if (!userId) {userId=6164}
+        if (!userId) {
+            userId = 6164
+        }
         this.props.getUserProfile(userId)
     }
+
     componentDidUpdate(prevProps) {
         let userId = this.props.router.params.userId
         if (prevProps.router.params.userId !== userId) {
@@ -18,17 +21,24 @@ class ProfileContainer extends React.Component {
             this.props.getUserProfile(userId)
         }
     }
+
     //need read about this
 
     render() {
+
+        if (this.props.isAuth === false) {
+            return <Navigate to={'/login'}/>
+        }
+
         return <>
-                <Profile {...this.props} profile={this.props.profile}/>
-            </>
+            <Profile {...this.props} profile={this.props.profile}/>
+        </>
     }
 }
 
 const mapStateToProps = (props) => ({
-    profile: props.profilePage.profile
+    profile: props.profilePage.profile,
+    isAuth: props.auth.isAuth
 })
 
 function withRouter(Component) {
@@ -39,13 +49,15 @@ function withRouter(Component) {
         return (
             <Component
                 {...props}
-                router={{ location, navigate, params }}
+                router={{location, navigate, params}}
             />
         );
     }
+
     return ComponentWithRouterProp;
 }
+
 //need read about this
 
 
-export default connect (mapStateToProps, {getUserProfile})(withRouter(ProfileContainer))
+export default connect(mapStateToProps, {getUserProfile})(withRouter(ProfileContainer))

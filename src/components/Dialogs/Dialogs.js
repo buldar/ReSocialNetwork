@@ -2,6 +2,7 @@ import React from "react";
 import style from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
+import {Navigate} from "react-router";
 
 export const Dialogs = (props) => {
 
@@ -13,10 +14,13 @@ export const Dialogs = (props) => {
         props.onSendMessageClick()
     }
     let newMessageChange = (e) => {
-        let newText=e.currentTarget.value
+        let newText = e.currentTarget.value
         props.newMessageChange(newText)
     }
 
+    if (props.isAuth===false) {
+        return <Navigate to={'/login'}/>
+    }
     return (
         <div>
             <div className={style.dialogs}>
@@ -35,8 +39,6 @@ export const Dialogs = (props) => {
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     )
