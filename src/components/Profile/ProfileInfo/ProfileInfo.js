@@ -20,7 +20,7 @@ export const ProfileInfo = (props) => {
                         : noAva
 
                 }/>
-                <ProfileStatus status = {'Hello'}/>
+                <ProfileStatus status = {props.status} updateStatus={props.updateStatus}/>
             </div>
             <div>
                 <div><span>{props.profile.aboutMe}</span></div>
